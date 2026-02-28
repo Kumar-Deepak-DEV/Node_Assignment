@@ -47,6 +47,11 @@ const products = [
     }
 ];
 
+
+app.get("/", (req, res) => {
+    res.send("server is working");
+})
+
 app.get("/products", (req, res) => {
     res.status(200).json(products)
 })

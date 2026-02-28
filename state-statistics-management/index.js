@@ -36,6 +36,10 @@ const states = [
 
 
 
+app.get("/", (req, res) => {
+    res.send("server is working");
+})
+
 app.get("/states", (req, res) => {
     res.status(200).json(states);
 })

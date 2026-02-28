@@ -84,6 +84,11 @@ const students = [
   },
 ];
 
+
+app.get("/", (req, res) => {
+    res.send("server is working");
+})
+
 app.get("/students",(req,res)=>{
     res.status(200).json(students);
 })
