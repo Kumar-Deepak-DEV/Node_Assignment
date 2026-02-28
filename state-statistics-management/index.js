@@ -54,7 +54,7 @@ app.get("/states/:id", (req, res) => {
 app.post("/states", (req, res) => {
     const data = req.body;
     const newState = {
-        id: states.length,
+        id: states.length+1,
         name: data.name,
         population: data.population,
         literacyRate: data.literacyRate,
@@ -68,30 +68,26 @@ app.put("/states/:id", (req, res) => {
     const sid = Number(req.params.id)
     const state = states.find(s => s.id === sid)
     const data = req.body;
-    state = {
-        name: data.name,
-        population: data.population,
-        literacyRate: data.literacyRate,
-        annualBudget: data.annualBudget,
-        gdp: data.gdp
-    }
+        state.name= data.name,
+        state.population= data.population,
+        state.literacyRate= data.literacyRate,
+        state.annualBudget= data.annualBudget,
+        state.gdp= data.gdp
     res.status(201).json(state);
 })
 
 app.put("/states/:id/budget", (req, res) => {
-    const sid = Number(req.params.id)
-    const state = states.find(s => s.id === sid)
-    const data = req.body;
-    state.annualBudget = data.budget;
-    res.status(201).json(state);
+    const id = Number(req.params.id);
+    const index = states.findIndex((u) => u.id == id);
+    states[index].annualBudget = req.body.budget;
+    res.status(200).json({ message: "Budget Updated",state:states[index]  });
 })
 
 app.put("/states/:id/population", (req, res) => {
-    const sid = Number(req.params.id)
-    const state = states.find(s => s.id === sid)
-    const data = req.body;
-    state.population = data.population;
-    res.status(201).json(state);
+    const id = Number(req.params.id);
+    const index = states.findIndex((u) => u.id == id);
+    states[index].population = req.body.population;
+    res.status(200).json({ message: "Population Updated", state:states[index] });
 })
 
 
@@ -103,7 +99,7 @@ app.patch("/states/:id/literacy", (req, res) => {
         return res.status(404).json({ message: "state not found" });
     }
 
-    if (req.body.literacyRate) states[index].literacyRate = req.body.literacyRate;
+    if (req.body.literacy) states[index].literacyRate = req.body.literacy;
 
     res.status(200).json({
         message: "state Updated",
@@ -173,13 +169,13 @@ app.delete("/states/name/:stateName", (req, res) => {
 
     if (index == -1) {
         return res.status(404).json({
-            message: "User not found"
+            message: "State not found"
         })
     }
 
     states.splice(index, 1);
 
-    res.status(204).json({ message: "user deleted" });
+    res.status(204).json({ message: "State deleted" });
 
 })
 
