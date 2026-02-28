@@ -1,0 +1,15 @@
+{
+  "name": "state-statistics-management",
+  "version": "1.0.0",
+  "description": "statistical data of Indian states",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dk Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}
